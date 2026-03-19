@@ -1,0 +1,4 @@
+[submodule "third_party/SAILOR"]
+	path = third_party/SAILOR
+	url = https://github.com/piroo8/SAILOR.git
+	branch = main

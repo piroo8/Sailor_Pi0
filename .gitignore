@@ -1,0 +1,18 @@
+# General
+__pycache__/
+wandb**
+.gitattributes
+.cache/
+.ipynb_checkpoints/
+sailor_repo.zip
+
+# SAILOR specific
+sbatch/**
+scratch_dir/*
+!scratch_dir/.gitkeep
+datasets/maniskill_datasets**
+datasets/robomimic_datasets**
+datasets/robocasa_datasets**
+
+demos/**
+*.sh
