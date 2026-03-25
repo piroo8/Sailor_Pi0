@@ -328,7 +328,10 @@ def _build_runtime_config(args):
         action_repeat=1,
         high_res_render=False,
         highres_img_size=args.env_image_size,
-        state_dim=9,
+        base_policy_backend="pi0_jax",
+        # Keep the low-dim state aligned with the integrated pi0_jax SAILOR path:
+        # 7 joint positions + 1 normalized gripper scalar.
+        state_dim=8,
         action_dim=8,
         time_limit=args.time_limit
         if args.time_limit is not None
@@ -511,7 +514,9 @@ def make_robomimic_env(cfg):
     env = make_env_robomimic(
         env_meta=env_meta,
         obs_keys=list(IMAGE_OBS_KEYS),
-        shape_meta=create_shape_meta(img_size=cfg.image_size, include_state=True),
+        shape_meta=create_shape_meta(
+            img_size=cfg.image_size, include_state=True, action_dim=cfg.action_dim
+        ),
         add_state=True,
         reward_shaping=cfg.shape_rewards,
         config=cfg,

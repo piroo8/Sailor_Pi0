@@ -26,8 +26,12 @@ import h5py
 import numpy as np
 import torch
 
-
-PANDA_GRIPPER_MAX_QPOS = 0.04
+from pi0_action_contract import (
+    PANDA_GRIPPER_MAX_QPOS,
+    exec_gripper_to_droid_binary,
+    normalize_gripper_qpos_to_scalar,
+    raw_gripper_action_to_exec_sign,
+)
 
 
 _REQUIRED_PATHS = (
@@ -150,20 +154,14 @@ def _ensure_hwc_uint8(image: np.ndarray) -> np.ndarray:
 
 def robomimic_gripper_qpos_to_droid_scalar(raw_qpos: np.ndarray | float) -> np.ndarray:
     """Match the inference script's Panda qpos -> DROID gripper scalar conversion."""
-    raw = np.asarray(raw_qpos, dtype=np.float32).reshape(-1)
-    if raw.size == 0:
-        raise ValueError("Empty gripper qpos.")
-    # Panda finger joints are mirrored, so max(abs(.)) gives a stable scalar
-    # whether the source stored one finger or both.
-    mag = float(np.max(np.abs(raw)))
-    value = 1.0 - np.clip(mag / PANDA_GRIPPER_MAX_QPOS, 0.0, 1.0)
-    return np.asarray([value], dtype=np.float32)
+    return normalize_gripper_qpos_to_scalar(raw_qpos)
 
 
 def robomimic_gripper_action_to_droid_binary(raw_action: np.ndarray) -> np.ndarray:
     """Map RoboMimic {-1,+1}-style gripper actions into DROID {0,1} training labels."""
-    raw = np.asarray(raw_action, dtype=np.float32)
-    return (raw > 0.0).astype(np.float32)
+    return exec_gripper_to_droid_binary(
+        raw_gripper_action_to_exec_sign(raw_action)
+    )
 
 
 @dataclass(frozen=True)
