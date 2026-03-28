@@ -1,12 +1,12 @@
 #!/bin/bash
 # Smoke-only launcher: designed to reach the first successful pi0 JAX update quickly.
 # Do not use this script for full training runs.
-#SBATCH --job-name=sailor_pi0_lift5_ckpt24000_smoke_first_update
-#SBATCH --output=/home/ishakpie/projects/def-rhinehar/ishakpie/logs/sailor_pi0_lift5_ckpt24000_smoke_first_update_%j.out
-#SBATCH --error=/home/ishakpie/projects/def-rhinehar/ishakpie/logs/sailor_pi0_lift5_ckpt24000_smoke_first_update_%j.err
-#SBATCH --time=12:00:00
+#SBATCH --job-name=sailor_pi0_lift5_ckpt24000_smoke_first_update_resume
+#SBATCH --output=/home/ishakpie/projects/def-rhinehar/ishakpie/logs/sailor_pi0_lift5_ckpt24000_smoke_first_update_resume_%j.out
+#SBATCH --error=/home/ishakpie/projects/def-rhinehar/ishakpie/logs/sailor_pi0_lift5_ckpt24000_smoke_first_update_resume_%j.err
+#SBATCH --time=0:59:00
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=48G
+#SBATCH --mem=64G
 #SBATCH --gres=gpu:h100:1
 #SBATCH --account=def-rhinehar
 #SBATCH --mail-user=pierreishak2003@gmail.com
@@ -23,6 +23,22 @@ DATASET=/SAILOR/datasets/robomimic_datasets/lift/ph/image_224_shaped_done1_v141.
 TASK=robomimic__lift
 PROMPT="Lift block above the table."
 TRAIN_SEED=18
+WANDB_EXP_NAME=pi0_lift5_ckpt24000_smoke_first_update
+RESUME_RUN_LOGDIR="${RESUME_RUN_LOGDIR:-}"
+
+AUTO_RESUME_RUN_LOGDIR="${SAILOR_HOST_DIR}/scratch_dir/logs/${TASK,,}/${WANDB_EXP_NAME}_demos5/seed${TRAIN_SEED}"
+if [ -z "$RESUME_RUN_LOGDIR" ] \
+  && [ -f "${AUTO_RESUME_RUN_LOGDIR}/run_state.json" ] \
+  && [ -f "${AUTO_RESUME_RUN_LOGDIR}/resume_latest_residual_checkpoint.pt" ] \
+  && [ -f "${AUTO_RESUME_RUN_LOGDIR}/resume_latest_base_policy.pt" ] \
+  && [ -d "${AUTO_RESUME_RUN_LOGDIR}/resume_replay_buffer" ]; then
+  RESUME_RUN_LOGDIR="$AUTO_RESUME_RUN_LOGDIR"
+  echo "Auto-resuming from $RESUME_RUN_LOGDIR"
+fi
+
+if [ -n "$RESUME_RUN_LOGDIR" ] && [[ "$RESUME_RUN_LOGDIR" == "$SAILOR_HOST_DIR"* ]]; then
+  RESUME_RUN_LOGDIR="/SAILOR${RESUME_RUN_LOGDIR#$SAILOR_HOST_DIR}"
+fi
 
 export CHECKPOINT
 export SELECTED_DEMOS_MANIFEST
@@ -30,6 +46,8 @@ export DATASET
 export TASK
 export PROMPT
 export TRAIN_SEED
+export WANDB_EXP_NAME
+export RESUME_RUN_LOGDIR
 
 for required_path in \
   "$SIF_PATH" \
@@ -135,13 +153,18 @@ apptainer exec --nv \
     test -f "$DATASET" || { echo "ERROR: missing dataset at $DATASET"; exit 1; }
 
     cd /SAILOR
+    resume_args=()
+    if [ -n "${RESUME_RUN_LOGDIR:-}" ]; then
+      resume_args=(--resume-run "$RESUME_RUN_LOGDIR")
+    fi
     python3 ./third_party/SAILOR/train_sailor.py \
+      "${resume_args[@]}" \
       --configs cfg_dp_mppi robomimic \
       --task "$TASK" \
       --num_exp_trajs 5 \
       --num_exp_val_trajs 0 \
       --seed "$TRAIN_SEED" \
-      --wandb_exp_name pi0_lift5_ckpt24000_smoke_first_update \
+      --wandb_exp_name "$WANDB_EXP_NAME" \
       --debug True \
       --set base_policy_backend pi0_jax \
       --set pi0.checkpoint "$CHECKPOINT" \
