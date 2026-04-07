@@ -1,0 +1,12 @@
+task,demo,selection_family,method_label,status,reason
+square,100,latest,Step init,results pending,no matching runs found
+square,100,latest,Latest distilled Pi0Jax,results pending,no matching runs found
+square,100,latest,Latest round of SAILOR training,results pending,no matching runs found
+square,100,best,Step init,results pending,no matching runs found
+square,100,best,Best distilled Pi0Jax,results pending,no matching runs found
+square,100,best,Best round of SAILOR training,results pending,no matching runs found
+square,100,matched_vs_ours,DP + SAILOR matched round,results pending,no matched round available
+square,100,official_vs_ours,Pi0droid LoRA + SAILOR step_init,results pending,no matching runs found
+square,100,official_vs_ours,Pi0droid LoRA + SAILOR best round,results pending,no matching runs found
+square,100,matched_vs_ours,Pi0droid LoRA + SAILOR step_init,results pending,no matching runs found
+square,100,matched_vs_ours,Pi0droid LoRA + SAILOR best round,results pending,no matching runs found

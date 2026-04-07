@@ -1,0 +1,108 @@
+Task: lift
+Demo: 5
+
+[best] Best distilled Pi0Jax
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/Pi0Jax_eval_videos/step_round_10
+  round_index: 10
+  success_pct: 52.00
+  reward_mean: -67.242000
+
+[best] Best round of SAILOR training
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/SAILOR_eval_videos/step_round_10
+  round_index: 10
+  success_pct: 86.00
+  reward_mean: -53.242000
+
+[best] Step init
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/Pi0Jax_eval_videos/step_init
+  success_pct: 40.00
+  reward_mean: -74.274000
+
+[latest] Latest distilled Pi0Jax
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/Pi0Jax_eval_videos/step_round_10
+  round_index: 10
+  success_pct: 52.00
+  reward_mean: -67.242000
+
+[latest] Latest round of SAILOR training
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/SAILOR_eval_videos/step_round_10
+  round_index: 10
+  success_pct: 86.00
+  reward_mean: -53.242000
+
+[latest] Step init
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/Pi0Jax_eval_videos/step_init
+  success_pct: 40.00
+  reward_mean: -74.274000
+
+[matched_vs_ours] DP + SAILOR matched round
+  status: selected
+  run_root: /OFFICIAL/robomimic__lift/Good_full_run/lift_18h_2cpu_40gb_gpu_16ram_resnetload_demos5/seed0
+  step_dir: /OFFICIAL/robomimic__lift/Good_full_run/lift_18h_2cpu_40gb_gpu_16ram_resnetload_demos5/seed0/SAILOR_eval_videos/step_round_10
+  round_index: 10
+  success_pct: 90.00
+  reward_mean: -38.882000
+
+[matched_vs_ours] DP + SAILOR step_init
+  status: selected
+  run_root: /OFFICIAL/robomimic__lift/Good_full_run/lift_18h_2cpu_40gb_gpu_16ram_resnetload_demos5/seed0
+  step_dir: /OFFICIAL/robomimic__lift/Good_full_run/lift_18h_2cpu_40gb_gpu_16ram_resnetload_demos5/seed0/DP_Distilled_eval_videos/step_init
+  success_pct: 54.00
+  reward_mean: -56.882000
+
+[matched_vs_ours] Pi0droid LoRA + SAILOR best round
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/SAILOR_eval_videos/step_round_10
+  round_index: 10
+  success_pct: 86.00
+  reward_mean: -53.242000
+
+[matched_vs_ours] Pi0droid LoRA + SAILOR step_init
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/Pi0Jax_eval_videos/step_init
+  success_pct: 40.00
+  reward_mean: -74.274000
+
+[official_vs_ours] DP + SAILOR best round
+  status: selected
+  run_root: /OFFICIAL/robomimic__lift/Good_full_run/lift_18h_2cpu_40gb_gpu_16ram_resnetload_demos5/seed0
+  step_dir: /OFFICIAL/robomimic__lift/Good_full_run/lift_18h_2cpu_40gb_gpu_16ram_resnetload_demos5/seed0/SAILOR_eval_videos/step_round_20
+  round_index: 20
+  success_pct: 100.00
+  reward_mean: -31.862000
+
+[official_vs_ours] DP + SAILOR step_init
+  status: selected
+  run_root: /OFFICIAL/robomimic__lift/Good_full_run/lift_18h_2cpu_40gb_gpu_16ram_resnetload_demos5/seed0
+  step_dir: /OFFICIAL/robomimic__lift/Good_full_run/lift_18h_2cpu_40gb_gpu_16ram_resnetload_demos5/seed0/DP_Distilled_eval_videos/step_init
+  success_pct: 54.00
+  reward_mean: -56.882000
+
+[official_vs_ours] Pi0droid LoRA + SAILOR best round
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/SAILOR_eval_videos/step_round_10
+  round_index: 10
+  success_pct: 86.00
+  reward_mean: -53.242000
+
+[official_vs_ours] Pi0droid LoRA + SAILOR step_init
+  status: selected
+  run_root: /OURS/lift5_24000_demos5/seed28
+  step_dir: /OURS/lift5_24000_demos5/seed28/Pi0Jax_eval_videos/step_init
+  success_pct: 40.00
+  reward_mean: -74.274000

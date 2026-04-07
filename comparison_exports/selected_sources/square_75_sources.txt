@@ -1,0 +1,108 @@
+Task: square
+Demo: 75
+
+[best] Best distilled Pi0Jax
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/Pi0Jax_eval_videos/step_round_10
+  round_index: 10
+  success_pct: 0.00
+  reward_mean: -175.146000
+
+[best] Best round of SAILOR training
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/SAILOR_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 0.00
+  reward_mean: -170.094000
+
+[best] Step init
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/Pi0Jax_eval_videos/step_init
+  success_pct: 0.00
+  reward_mean: -177.782000
+
+[latest] Latest distilled Pi0Jax
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/Pi0Jax_eval_videos/step_round_30
+  round_index: 30
+  success_pct: 0.00
+  reward_mean: -176.410000
+
+[latest] Latest round of SAILOR training
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/SAILOR_eval_videos/step_round_40
+  round_index: 40
+  success_pct: 0.00
+  reward_mean: -181.483333
+
+[latest] Step init
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/Pi0Jax_eval_videos/step_init
+  success_pct: 0.00
+  reward_mean: -177.782000
+
+[matched_vs_ours] DP + SAILOR matched round
+  status: selected
+  run_root: /OFFICIAL/robomimic__square/square_75_demos_75h_1cpu_40gb_gpu_18ram_resnetload_demos75/seed0
+  step_dir: /OFFICIAL/robomimic__square/square_75_demos_75h_1cpu_40gb_gpu_18ram_resnetload_demos75/seed0/SAILOR_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 44.00
+  reward_mean: -128.958000
+
+[matched_vs_ours] DP + SAILOR step_init
+  status: selected
+  run_root: /OFFICIAL/robomimic__square/square_75_demos_75h_1cpu_40gb_gpu_18ram_resnetload_demos75/seed0
+  step_dir: /OFFICIAL/robomimic__square/square_75_demos_75h_1cpu_40gb_gpu_18ram_resnetload_demos75/seed0/DP_Distilled_eval_videos/step_init
+  success_pct: 54.00
+  reward_mean: -139.736000
+
+[matched_vs_ours] Pi0droid LoRA + SAILOR best round
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/SAILOR_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 0.00
+  reward_mean: -170.094000
+
+[matched_vs_ours] Pi0droid LoRA + SAILOR step_init
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/Pi0Jax_eval_videos/step_init
+  success_pct: 0.00
+  reward_mean: -177.782000
+
+[official_vs_ours] DP + SAILOR best round
+  status: selected
+  run_root: /OFFICIAL/robomimic__square/square_75_demos_75h_1cpu_40gb_gpu_18ram_resnetload_demos75/seed0
+  step_dir: /OFFICIAL/robomimic__square/square_75_demos_75h_1cpu_40gb_gpu_18ram_resnetload_demos75/seed0/SAILOR_eval_videos/step_round_86
+  round_index: 86
+  success_pct: 94.00
+  reward_mean: -102.622000
+
+[official_vs_ours] DP + SAILOR step_init
+  status: selected
+  run_root: /OFFICIAL/robomimic__square/square_75_demos_75h_1cpu_40gb_gpu_18ram_resnetload_demos75/seed0
+  step_dir: /OFFICIAL/robomimic__square/square_75_demos_75h_1cpu_40gb_gpu_18ram_resnetload_demos75/seed0/DP_Distilled_eval_videos/step_init
+  success_pct: 54.00
+  reward_mean: -139.736000
+
+[official_vs_ours] Pi0droid LoRA + SAILOR best round
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/SAILOR_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 0.00
+  reward_mean: -170.094000
+
+[official_vs_ours] Pi0droid LoRA + SAILOR step_init
+  status: selected
+  run_root: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555
+  step_dir: /OURS/robomimic__square/square75_24000_main_clean_demos75/seed555/Pi0Jax_eval_videos/step_init
+  success_pct: 0.00
+  reward_mean: -177.782000

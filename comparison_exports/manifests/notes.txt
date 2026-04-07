@@ -1,0 +1,11 @@
+Our results root: /OURS
+Official results root: /OFFICIAL
+Output root: /OURS/comparison_exports
+
+Notes:
+- Success and reward are averaged over all parseable rollout videos found for a step, across available cameras.
+- Mean reward is the average episode return over the evaluation rollouts found for that step.
+- Less negative mean reward is better.
+- Missing task/demo combinations are labeled as Results not yet available.
+- We did not finish the pi0-based SAILOR loop to the full intended env-step budget yet.
+- More tuning is still needed to reach stronger SAILOR-VLA results.

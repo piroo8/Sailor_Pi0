@@ -1,0 +1,108 @@
+Task: can
+Demo: 10
+
+[best] Best distilled Pi0Jax
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/Pi0Jax_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 18.00
+  reward_mean: -170.600000
+
+[best] Best round of SAILOR training
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/SAILOR_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 28.00
+  reward_mean: -162.510000
+
+[best] Step init
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/Pi0Jax_eval_videos/step_init
+  success_pct: 18.00
+  reward_mean: -170.290000
+
+[latest] Latest distilled Pi0Jax
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/Pi0Jax_eval_videos/step_round_40
+  round_index: 40
+  success_pct: 0.00
+  reward_mean: -198.686000
+
+[latest] Latest round of SAILOR training
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/SAILOR_eval_videos/step_round_40
+  round_index: 40
+  success_pct: 0.00
+  reward_mean: -197.300000
+
+[latest] Step init
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/Pi0Jax_eval_videos/step_init
+  success_pct: 18.00
+  reward_mean: -170.290000
+
+[matched_vs_ours] DP + SAILOR matched round
+  status: selected
+  run_root: /OFFICIAL/robomimic__can/can_10demos_75h_1cpu_40gb_gpu_16ram_resnetload_demos10/seed1
+  step_dir: /OFFICIAL/robomimic__can/can_10demos_75h_1cpu_40gb_gpu_16ram_resnetload_demos10/seed1/SAILOR_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 62.00
+  reward_mean: -128.504000
+
+[matched_vs_ours] DP + SAILOR step_init
+  status: selected
+  run_root: /OFFICIAL/robomimic__can/can_10demos_75h_1cpu_40gb_gpu_16ram_resnetload_demos10/seed1
+  step_dir: /OFFICIAL/robomimic__can/can_10demos_75h_1cpu_40gb_gpu_16ram_resnetload_demos10/seed1/DP_Distilled_eval_videos/step_init
+  success_pct: 32.00
+  reward_mean: -158.102000
+
+[matched_vs_ours] Pi0droid LoRA + SAILOR best round
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/SAILOR_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 28.00
+  reward_mean: -162.510000
+
+[matched_vs_ours] Pi0droid LoRA + SAILOR step_init
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/Pi0Jax_eval_videos/step_init
+  success_pct: 18.00
+  reward_mean: -170.290000
+
+[official_vs_ours] DP + SAILOR best round
+  status: selected
+  run_root: /OFFICIAL/robomimic__can/can_10demos_75h_1cpu_40gb_gpu_16ram_resnetload_demos10/seed1
+  step_dir: /OFFICIAL/robomimic__can/can_10demos_75h_1cpu_40gb_gpu_16ram_resnetload_demos10/seed1/SAILOR_eval_videos/step_round_90
+  round_index: 90
+  success_pct: 86.00
+  reward_mean: -86.958000
+
+[official_vs_ours] DP + SAILOR step_init
+  status: selected
+  run_root: /OFFICIAL/robomimic__can/can_10demos_75h_1cpu_40gb_gpu_16ram_resnetload_demos10/seed1
+  step_dir: /OFFICIAL/robomimic__can/can_10demos_75h_1cpu_40gb_gpu_16ram_resnetload_demos10/seed1/DP_Distilled_eval_videos/step_init
+  success_pct: 32.00
+  reward_mean: -158.102000
+
+[official_vs_ours] Pi0droid LoRA + SAILOR best round
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/SAILOR_eval_videos/step_round_0
+  round_index: 0
+  success_pct: 28.00
+  reward_mean: -162.510000
+
+[official_vs_ours] Pi0droid LoRA + SAILOR step_init
+  status: selected
+  run_root: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555
+  step_dir: /OURS/robomimic__can/can10_24000_main_clean_demos10/seed555/Pi0Jax_eval_videos/step_init
+  success_pct: 18.00
+  reward_mean: -170.290000
