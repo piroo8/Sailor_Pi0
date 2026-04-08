@@ -31,15 +31,10 @@ Design choices (from debugging/probing):
 - Keep Sailor evaluator/video flow unchanged.
 
 - Force Panda gripper fully open on every reset to match real DROID robot start state.
-
-- create_trained_policy auto-detects JAX vs PyTorch checkpoint format.
-- pi_config_name resolved from checkpoint config.json if present, else CLI fallback.
 """
 
 import argparse
 import copy
-import json
-
 import os
 import sys
 from pathlib import Path
@@ -65,7 +60,7 @@ except ModuleNotFoundError:
 
     yaml = SimpleNamespace(YAML=_ShimYAML)
 
-_REPO_ROOT = Path(__file__).resolve().parent
+_REPO_ROOT = Path(__file__).resolve().parents[1]
 _SAILOR_ROOT = _REPO_ROOT / "third_party" / "SAILOR"
 if str(_SAILOR_ROOT) not in sys.path:
     sys.path.insert(0, str(_SAILOR_ROOT))
@@ -167,12 +162,12 @@ def _force_gripper_open(env):
     if len(gripper_joints) != 2:
         raise ValueError(f"Expected 2 gripper joints, got {gripper_joints}")
 
-    # SingleArm has no set_gripper_joint_positions in this robosuite install,
-    # so write finger joint qpos directly into MuJoCo state.
+    # SingleArm has no set_gripper_joint_positions — write directly to sim qpos.
+    # gripper.joints gives the two finger joint names in order.
+    # PANDA_OPEN_QPOS = [+0.04, -0.04] matches MJCF joint ranges exactly.
     for name, q in zip(gripper_joints, PANDA_OPEN_QPOS):
         sim.data.set_joint_qpos(name, float(q))
 
-    # Keep gripper internal action state neutral after reset if available.
     if hasattr(robot.gripper, "current_action") and hasattr(robot.gripper, "dof"):
         robot.gripper.current_action = np.zeros(robot.gripper.dof, dtype=np.float32)
 
@@ -181,18 +176,21 @@ def _force_gripper_open(env):
 # --- NEW ---
 # [25] ForceOpenGripperOnReset: wrapper that fires _force_gripper_open on every reset.
 # Why: ModelEvaluator calls reset() between episodes, not just once at startup.
-#      We keep the returned wrapped-env observation format unchanged.
+#      Wrapping here ensures every episode starts with correct gripper state.
+#      Must be inserted BEFORE TimeLimit/SelectAction/UUID wrappers so that
+#      _unwrap_robosuite_env can still reach the raw robosuite env via .env chain.
 class ForceOpenGripperOnReset:
     """Env wrapper: force Panda gripper fully open after every reset."""
-
+ 
     def __init__(self, env):
+        # Named self.env so _unwrap_robosuite_env can peel through this wrapper.
         self.env = env
-
+ 
     def reset(self, *args, **kwargs):
         obs = self.env.reset(*args, **kwargs)
         _force_gripper_open(self.env)
         return obs
-
+ 
     def __getattr__(self, name):
         return getattr(self.env, name)
  
@@ -647,10 +645,8 @@ class Pi0DroidChunkAgent:
         batch = np.stack(actions, axis=0)
         if batch.shape != (self.num_envs, self.action_dim):
             raise ValueError(
-                f"Action batch shape mismatch: got {batch.shape}, "
-                f"expected ({self.num_envs}, {self.action_dim})"
+                f"Action batch shape mismatch: got {batch.shape}, expected ({self.num_envs}, {self.action_dim})"
             )
-            
         return batch
 
 
@@ -705,34 +701,10 @@ def run_rollout(args):
         f"open_loop_horizon_pct={args.open_loop_horizon_pct}, action_dim={cfg.action_dim}"
     )
 
-    # 3.4 Resolve pi_config_name and load policy.
-    #
-    # Priority order:
-    #   1. checkpoint's config.json "pi_config_name" key  ← auto for fine-tuned checkpoints
-    #   2. --pi-config-name CLI argument                  ← fallback (default: pi0_droid)
-    #
-    # For current JAX and converted PyTorch checkpoints, config.json has no
-    # "pi_config_name" key so this falls back to --pi-config-name (pi0_droid).
-    # When fine-tuning, add "pi_config_name": "your_config" to config.json at
-    # export time and this script picks it up automatically.
-
+    # 3.4 Load policy and DROID example template schema.
+    pi_cfg = pi_config.get_config(args.pi_config_name)
     checkpoint_dir = download.maybe_download(args.checkpoint)
 
-    checkpoint_config_path = Path(checkpoint_dir) / "config.json"
-    pi_config_name = args.pi_config_name  # default fallback
-    if checkpoint_config_path.exists():
-        ckpt_meta = json.loads(checkpoint_config_path.read_text())
-        if "pi_config_name" in ckpt_meta:
-            pi_config_name = ckpt_meta["pi_config_name"]
-            print(f"pi_config_name from checkpoint config.json: {pi_config_name}")
-        else:
-            print(f"config.json present but no pi_config_name key — using CLI: {pi_config_name}")
-    else:
-        print(f"No config.json in checkpoint — using CLI: {pi_config_name}")
-
-    pi_cfg = pi_config.get_config(pi_config_name)
-
-    # Per OpenPI docs: same API, same call, just point to the right checkpoint dir.
     # create_trained_policy auto-detects JAX vs converted PyTorch checkpoint format.
     print(f"Loading policy from {checkpoint_dir}")
     policy = policy_config.create_trained_policy(pi_cfg, checkpoint_dir)
@@ -827,10 +799,7 @@ def parse_args():
     parser.add_argument(
         "--pi-config-name",
         default="pi0_droid",
-        help=(
-            "OpenPI config name to load. Used as fallback if checkpoint's "
-            "config.json does not contain a pi_config_name key."
-        ),
+        help="OpenPI config name to load.",
     )
     parser.add_argument(
         "--checkpoint",

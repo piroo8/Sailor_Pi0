@@ -66,7 +66,7 @@ except ModuleNotFoundError:
 
     yaml = SimpleNamespace(YAML=_ShimYAML)
 
-_REPO_ROOT = Path(__file__).resolve().parent
+_REPO_ROOT = Path(__file__).resolve().parents[1]
 _SAILOR_ROOT = _REPO_ROOT / "third_party" / "SAILOR"
 if str(_SAILOR_ROOT) not in sys.path:
     sys.path.insert(0, str(_SAILOR_ROOT))
